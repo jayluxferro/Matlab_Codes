@@ -1,0 +1,477 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>quiz3</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-11-07"><meta name="DC.source" content="quiz3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Question 1</a></li><li><a href="#3">Question 2</a></li><li><a href="#4">Question 3</a></li><li><a href="#5">Question 4</a></li><li><a href="#6">Finding the roots P(s),Q(s) and R(s)</a></li><li><a href="#7">Calculating for L(s)</a></li><li><a href="#8">Plotting Amplitude modulated signal</a></li></ul></div><pre class="codeinput"><span class="comment">%quiz 3</span>
+clc;
+clear;
+close <span class="string">all</span>;
+</pre><h2>Question 1<a name="2"></a></h2><p>y1(t)=5cos(2 pi t) y2(t)=5cos(2pi(t-(pi/2))) y3(t)=5sin(2pi t) t=[-2 2]</p><pre class="codeinput">t=linspace(-2,2,1000);
+y1=5.*cos(2*pi.*t);
+y2=5.*cos(2*pi*(t-(pi/2)));
+y3=5*sin(2*pi.*t);
+figure
+plot(t,y1,t,y2,t,y3),xlabel(<span class="string">'t'</span>),ylabel(<span class="string">'y(t)'</span>),legend(<span class="string">'y1(t)=5cos(2\pi t)'</span>,<span class="keyword">...</span>
+    <span class="string">'y2(t)=5cos(2\pi (t-(\pi /2)))'</span>,<span class="string">'y3(t)=5sin(2\pi t)'</span>),<span class="keyword">...</span>
+    title(<span class="string">'Plot of y1(t),y2(t) and y3(t)'</span>);
+</pre><img vspace="5" hspace="5" src="quiz3_01.png" alt=""> <h2>Question 2<a name="3"></a></h2><p>P(s) = s^3 + 2s^2 + s- 5 Q(s) = s^2 + 5s + 6 R(s) = s^4 + 3s^3 -2s^2 + 4s - 10 s=[-20 20]</p><pre class="codeinput">S=linspace(-20,20,10000);
+P=[1 2 1 -5];
+Q=[1 5 6];
+R=[1 3 -2 4 10];
+P1=polyval(P,S);
+Q1=polyval(Q,S);
+R1=polyval(R,S);
+figure
+subplot(1,3,1);
+plot(S,P1),xlabel(<span class="string">'s'</span>),ylabel(<span class="string">'P(s)'</span>);
+subplot(1,3,2);
+plot(S,Q1),xlabel(<span class="string">'s'</span>),ylabel(<span class="string">'Q(s)'</span>);
+subplot(1,3,3);
+plot(S,R1),xlabel(<span class="string">'s'</span>),ylabel(<span class="string">'R(s)'</span>);
+</pre><img vspace="5" hspace="5" src="quiz3_02.png" alt=""> <h2>Question 3<a name="4"></a></h2><pre class="codeinput">disp(<span class="string">'H(s)'</span>)
+<span class="comment">% x is the quotient and y is the remainder</span>
+[x,y]=deconv(R,Q)
+
+disp(<span class="string">'T(s)'</span>)
+[x,y]=deconv(P,Q)
+
+disp(<span class="string">'Z(s)'</span>)
+[x,y]=deconv(R,P)
+
+disp(<span class="string">'W(s)'</span>)
+[x,y]=deconv(P,R)
+
+disp(<span class="string">'V(s)'</span>)
+[x,y]=deconv(Q,R)
+
+disp(<span class="string">'U(s)'</span>)
+[x,y]=deconv(Q,P)
+</pre><pre class="codeoutput">H(s)
+
+x =
+
+     1    -2     2
+
+
+y =
+
+     0     0     0     6    -2
+
+T(s)
+
+x =
+
+     1    -3
+
+
+y =
+
+     0     0    10    13
+
+Z(s)
+
+x =
+
+     1     1
+
+
+y =
+
+     0     0    -5     8    15
+
+W(s)
+
+x =
+
+     0
+
+
+y =
+
+     1     2     1    -5
+
+V(s)
+
+x =
+
+     0
+
+
+y =
+
+     1     5     6
+
+U(s)
+
+x =
+
+     0
+
+
+y =
+
+     1     5     6
+
+</pre><h2>Question 4<a name="5"></a></h2><p>Determining the partial fraction of the above deconvolution</p><pre class="codeinput">disp(<span class="string">'Calculating partial fraction...'</span>)
+disp(<span class="string">'H(s)'</span>)
+[r,p,k]=residue(R,Q)
+
+disp(<span class="string">'T(s)'</span>)
+[r,p,k]=residue(P,Q)
+
+disp(<span class="string">'Z(s)'</span>)
+[r,p,k]=residue(R,P)
+
+disp(<span class="string">'W(s)'</span>)
+[r,p,k]=residue(P,R)
+
+disp(<span class="string">'V(s)'</span>)
+[r,p,k]=residue(Q,R)
+
+disp(<span class="string">'U(s)'</span>)
+[r,p,k]=residue(Q,P)
+</pre><pre class="codeoutput">Calculating partial fraction...
+H(s)
+
+r =
+
+   20.0000
+  -14.0000
+
+
+p =
+
+   -3.0000
+   -2.0000
+
+
+k =
+
+     1    -2     2
+
+T(s)
+
+r =
+
+   17.0000
+   -7.0000
+
+
+p =
+
+   -3.0000
+   -2.0000
+
+
+k =
+
+     1    -3
+
+Z(s)
+
+r =
+
+  -3.4615 - 1.7687i
+  -3.4615 + 1.7687i
+   1.9230 + 0.0000i
+
+
+p =
+
+  -1.5582 + 1.4321i
+  -1.5582 - 1.4321i
+   1.1163 + 0.0000i
+
+
+k =
+
+     1     1
+
+W(s)
+
+r =
+
+   0.5496 + 0.0000i
+   0.3998 + 0.0448i
+   0.3998 - 0.0448i
+  -0.3493 + 0.0000i
+
+
+p =
+
+  -3.6435 + 0.0000i
+   0.8947 + 1.2628i
+   0.8947 - 1.2628i
+  -1.1459 + 0.0000i
+
+
+k =
+
+     []
+
+V(s)
+
+r =
+
+  -0.0191 + 0.0000i
+  -0.0455 - 0.4506i
+  -0.0455 + 0.4506i
+   0.1101 + 0.0000i
+
+
+p =
+
+  -3.6435 + 0.0000i
+   0.8947 + 1.2628i
+   0.8947 - 1.2628i
+  -1.1459 + 0.0000i
+
+
+k =
+
+     []
+
+U(s)
+
+r =
+
+  -0.1969 - 0.2900i
+  -0.1969 + 0.2900i
+   1.3937 + 0.0000i
+
+
+p =
+
+  -1.5582 + 1.4321i
+  -1.5582 - 1.4321i
+   1.1163 + 0.0000i
+
+
+k =
+
+     []
+
+</pre><h2>Finding the roots P(s),Q(s) and R(s)<a name="6"></a></h2><pre class="codeinput">disp(<span class="string">'Calculating the roots of P(s), Q(s) and R(s)'</span>)
+disp(<span class="string">'Roots P(s)'</span>)
+roots(P)
+
+disp(<span class="string">'Roots Q(s)'</span>)
+roots(Q)
+
+disp(<span class="string">'Roots R(s)'</span>)
+roots(R)
+</pre><pre class="codeoutput">Calculating the roots of P(s), Q(s) and R(s)
+Roots P(s)
+
+ans =
+
+  -1.5582 + 1.4321i
+  -1.5582 - 1.4321i
+   1.1163 + 0.0000i
+
+Roots Q(s)
+
+ans =
+
+   -3.0000
+   -2.0000
+
+Roots R(s)
+
+ans =
+
+  -3.6435 + 0.0000i
+   0.8947 + 1.2628i
+   0.8947 - 1.2628i
+  -1.1459 + 0.0000i
+
+</pre><h2>Calculating for L(s)<a name="7"></a></h2><pre class="codeinput">L=polyder(conv(Q,R))
+</pre><pre class="codeoutput">
+L =
+
+     6    40    76    36    36    74
+
+</pre><h2>Plotting Amplitude modulated signal<a name="8"></a></h2><pre class="codeinput">Tam=linspace(-2*pi,2*pi,1000);
+fm=4*10^3;
+fc=99.5*10^6;
+Ec=40;
+Em=100;
+Mam=Em/Ec;
+Eam=Ec.*(1+Mam*(sin(2*pi*fm.*Tam))).*sin(2*pi*fc.*Tam);
+figure
+plot(Tam,Eam),xlabel(<span class="string">'t[-2\pi 2\pi]'</span>),ylabel(<span class="string">'e_{am}'</span>),title(<span class="string">'Amplitude Modulated Signal'</span>)
+</pre><img vspace="5" hspace="5" src="quiz3_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Justice Owusu Agyemang &reg; SPERIXLABS</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%quiz 3
+clc;
+clear;
+close all;
+%% Question 1
+% y1(t)=5cos(2 pi t)
+% y2(t)=5cos(2pi(t-(pi/2)))
+% y3(t)=5sin(2pi t)
+% t=[-2 2]
+t=linspace(-2,2,1000);
+y1=5.*cos(2*pi.*t);
+y2=5.*cos(2*pi*(t-(pi/2)));
+y3=5*sin(2*pi.*t);
+figure
+plot(t,y1,t,y2,t,y3),xlabel('t'),ylabel('y(t)'),legend('y1(t)=5cos(2\pi t)',...
+    'y2(t)=5cos(2\pi (t-(\pi /2)))','y3(t)=5sin(2\pi t)'),...
+    title('Plot of y1(t),y2(t) and y3(t)');
+
+
+%% Question 2
+% P(s) = s^3 + 2s^2 + s- 5
+% Q(s) = s^2 + 5s + 6
+% R(s) = s^4 + 3s^3 -2s^2 + 4s - 10
+% s=[-20 20]
+S=linspace(-20,20,10000);
+P=[1 2 1 -5];
+Q=[1 5 6];
+R=[1 3 -2 4 10];
+P1=polyval(P,S);
+Q1=polyval(Q,S);
+R1=polyval(R,S);
+figure
+subplot(1,3,1);
+plot(S,P1),xlabel('s'),ylabel('P(s)');
+subplot(1,3,2);
+plot(S,Q1),xlabel('s'),ylabel('Q(s)');
+subplot(1,3,3);
+plot(S,R1),xlabel('s'),ylabel('R(s)');
+
+
+%% Question 3
+disp('H(s)')
+% x is the quotient and y is the remainder
+[x,y]=deconv(R,Q)
+
+disp('T(s)')
+[x,y]=deconv(P,Q)
+
+disp('Z(s)')
+[x,y]=deconv(R,P)
+
+disp('W(s)')
+[x,y]=deconv(P,R)
+
+disp('V(s)')
+[x,y]=deconv(Q,R)
+
+disp('U(s)')
+[x,y]=deconv(Q,P)
+
+%% Question 4
+% Determining the partial fraction of the above deconvolution
+disp('Calculating partial fraction...')
+disp('H(s)')
+[r,p,k]=residue(R,Q)
+
+disp('T(s)')
+[r,p,k]=residue(P,Q)
+
+disp('Z(s)')
+[r,p,k]=residue(R,P)
+
+disp('W(s)')
+[r,p,k]=residue(P,R)
+
+disp('V(s)')
+[r,p,k]=residue(Q,R)
+
+disp('U(s)')
+[r,p,k]=residue(Q,P)
+
+
+%% Finding the roots P(s),Q(s) and R(s)
+disp('Calculating the roots of P(s), Q(s) and R(s)')
+disp('Roots P(s)')
+roots(P)
+
+disp('Roots Q(s)')
+roots(Q)
+
+disp('Roots R(s)')
+roots(R)
+
+
+%% Calculating for L(s)
+L=polyder(conv(Q,R))
+
+%% Plotting Amplitude modulated signal
+Tam=linspace(-2*pi,2*pi,1000);
+fm=4*10^3;
+fc=99.5*10^6;
+Ec=40;
+Em=100;
+Mam=Em/Ec;
+Eam=Ec.*(1+Mam*(sin(2*pi*fm.*Tam))).*sin(2*pi*fc.*Tam);
+figure
+plot(Tam,Eam),xlabel('t[-2\pi 2\pi]'),ylabel('e_{am}'),title('Amplitude Modulated Signal')
+##### SOURCE END #####
+--></body></html>

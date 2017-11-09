@@ -1,0 +1,1 @@
+fplot('sinc',[-10 10]),ylabel('sinc(x)'),xlabel('x')

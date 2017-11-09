@@ -1,0 +1,21 @@
+%transfer function of an elliptic IIR low filter
+clc; 
+clear;
+%fp=input('Enter Fp: ');
+%fs=input('Enter Fs; ');
+%rp=input('Enter Rp: ');
+%rs=input('Enter Rs: ');
+%ft=input('Enter Ft: ');
+fp=800; 
+fs=1000;
+rp=0.5; 
+rs=40;
+ft=4000;
+wp=(2*fp)/ft;
+ws=(2*fs)/ft;
+[N,Wn]=ellipord(wp,ws,rp,rs);
+[b,a]=ellip(N,rp,rs,Wn);
+[h,omega]=freqz(b,a,256);
+plot(omega/pi,20*log10(abs(h))); grid on;box on;
+xlabel('\omega/\pi'),ylabel('Gain, db');
+title('IIR Elliptic Low Pass Filter');

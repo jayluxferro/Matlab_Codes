@@ -1,0 +1,152 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Question 7</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-12-16"><meta name="DC.source" content="q7.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Question 7</h1><p>A final year Telecom Engineering student collected data on the traffic from a Telecom operator within a period of 1 hour. The data can be represented as follows: x=0:0.1:1; y=[-0.447 1.978 3.28 6.16 7.08 7.34 7.66 9.56 9.48 9.30 11.2] The student analyzed the data and sought to establish a relationship between the traffic and time. Three different functions of degree 2, 6 and 10 were considered; determine and plot the line of worst fit as well as the line of best fit using the MSE in each case.</p><pre class="codeinput">clc;
+clear;
+close <span class="string">all</span>;
+x=0:0.1:1;
+y=[-0.447 1.978 3.28 6.16 7.08 7.34 7.66 9.56 9.48 9.30 11.2];
+
+a2=polyfit(x,y,2);
+a6=polyfit(x,y,6);
+a10=polyfit(x,y,10);
+xi=linspace(0,1,101);
+yi2=polyval(a2,xi);
+yi6=polyval(a6,xi);
+yi10=polyval(a10,xi);
+
+<span class="comment">% Computing mean square values</span>
+y2hat=polyval(a2,x);
+y6hat=polyval(a6,x);
+y10hat=polyval(a10,x);
+
+MSE_2=mean((y2hat-y).^2)
+MSE_6=mean((y6hat-y).^2)
+MSE_10=mean((y10hat-y).^2)
+
+
+plot(x,y,<span class="string">'o'</span>,xi,yi2,<span class="string">'-'</span>,xi,yi6,<span class="string">'m'</span>,xi,yi10,<span class="string">'b'</span>),title(<span class="string">'Data Traffic'</span>),<span class="keyword">...</span>
+    xlabel(<span class="string">'Time(hours)'</span>),ylabel(<span class="string">'Data'</span>),legend(<span class="string">'Data Points'</span>,<span class="string">'Degree 2'</span>,<span class="keyword">...</span>
+    <span class="string">'Degree 6'</span>,<span class="string">'Degree 10'</span>),grid <span class="string">on</span>, box <span class="string">on</span>
+</pre><pre class="codeoutput">
+MSE_2 =
+
+    0.3882
+
+
+MSE_6 =
+
+    0.1654
+
+
+MSE_10 =
+
+   1.5949e-20
+
+</pre><img vspace="5" hspace="5" src="q7_01.png" alt=""></div><!--
+##### SOURCE BEGIN #####
+%% Question 7 
+% A final year Telecom Engineering student collected data on the traffic
+% from a Telecom operator within a period of 1 hour. The data can be
+% represented as follows:
+% x=0:0.1:1;
+% y=[-0.447 1.978 3.28 6.16 7.08 7.34 7.66 9.56 9.48 9.30 11.2]
+% The student analyzed the data and sought to establish a relationship
+% between the traffic and time. Three different functions of degree 2, 6
+% and 10 were considered; determine and plot the line of worst fit as well
+% as the line of best fit using the MSE in each case.
+clc;
+clear;
+close all;
+x=0:0.1:1;
+y=[-0.447 1.978 3.28 6.16 7.08 7.34 7.66 9.56 9.48 9.30 11.2];
+
+a2=polyfit(x,y,2);
+a6=polyfit(x,y,6);
+a10=polyfit(x,y,10);
+xi=linspace(0,1,101);
+yi2=polyval(a2,xi);
+yi6=polyval(a6,xi);
+yi10=polyval(a10,xi);
+
+% Computing mean square values
+y2hat=polyval(a2,x);
+y6hat=polyval(a6,x);
+y10hat=polyval(a10,x);
+
+MSE_2=mean((y2hat-y).^2)
+MSE_6=mean((y6hat-y).^2)
+MSE_10=mean((y10hat-y).^2)
+
+
+plot(x,y,'o',xi,yi2,'-',xi,yi6,'m',xi,yi10,'b'),title('Data Traffic'),...
+    xlabel('Time(hours)'),ylabel('Data'),legend('Data Points','Degree 2',...
+    'Degree 6','Degree 10'),grid on, box on
+
+##### SOURCE END #####
+--></body></html>
