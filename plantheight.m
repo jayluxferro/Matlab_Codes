@@ -11,7 +11,7 @@ bar(B,'b')
 grid on
 title('Growth Performance at 40 days')
 xlabel('Bed Number');
-ylabel('Plant Height');
+ylabel('Plant Height (CM)');
 legend('Intelligent Irrigation','Manual Irrigation');
 hold off
 
@@ -27,7 +27,7 @@ bar(B,'b')
 grid on
 title('Growth Performance at 50 days')
 xlabel('Bed Number');
-ylabel('Plant Height');
+ylabel('Plant Height (CM)');
 legend('Intelligent Irrigation','Manual Irrigation');
 hold off
 
